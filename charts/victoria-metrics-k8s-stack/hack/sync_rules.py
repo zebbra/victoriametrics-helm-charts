@@ -45,7 +45,6 @@ charts = [
         'source': 'https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/main/manifests/nodeExporter-prometheusRule.yaml',
         'destination': '../templates/rules',
     },
-    
     {
         'source': 'https://raw.githubusercontent.com/VictoriaMetrics/VictoriaMetrics/master/deployment/docker/alerts.yml',
         'destination': '../templates/rules',
@@ -65,9 +64,10 @@ condition_map = {
     'etcd': '.Values.kubeEtcd.enabled .Values.defaultRules.rules.etcd',
     'general.rules': '.Values.defaultRules.rules.general',
     'k8s.rules': '.Values.defaultRules.rules.k8s',
-    'kube-apiserver-availability.rules': '.Values.kubeApiServer.enabled .Values.defaultRules.rules.kubeApiserverAvailability',
-    'kube-apiserver-slos': '.Values.kubeApiServer.enabled .Values.defaultRules.rules.kubeApiserverSlos',
-    'kube-apiserver.rules': '.Values.kubeApiServer.enabled .Values.defaultRules.rules.kubeApiserver',
+    'kube-apiserver-burnrate.rules': '.Values.kubeApiServer.enabled .Values.defaultRules.rules.kubeApiserver .Values.defaultRules.rules.kubeApiserverBurnrate',
+    'kube-apiserver-availability.rules': '.Values.kubeApiServer.enabled .Values.defaultRules.rules.kubeApiserver .Values.defaultRules.rules.kubeApiserverAvailability',
+    'kube-apiserver-histogram.rules': '.Values.kubeApiServer.enabled .Values.defaultRules.rules.kubeApiserver .Values.defaultRules.rules.kubeApiserverHistogram',
+    'kube-apiserver-slos': '.Values.kubeApiServer.enabled .Values.defaultRules.rules.kubeApiserver .Values.defaultRules.rules.kubeApiserverSlos',
     'kube-prometheus-general.rules': '.Values.defaultRules.rules.kubePrometheusGeneral',
     'kube-prometheus-node-recording.rules': '.Values.defaultRules.rules.kubePrometheusNodeRecording',
     'kube-scheduler.rules': '.Values.kubeScheduler.enabled .Values.defaultRules.rules.kubeScheduler',

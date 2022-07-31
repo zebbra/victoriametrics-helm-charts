@@ -36,8 +36,16 @@ defaultRules:
     etcd: true
     general: true
     k8s: true
+    # -- Enable default Kubernetes API server rules.
+    # -- Set to false to disable all API server alerting and recording rules
     kubeApiserver: true
+    # -- Enable Kubernetes API availability recording rules
     kubeApiserverAvailability: true
+    # -- Enable Kubernetes API historgram recording rules
+    kubeApiserverHistorgram: true
+    # -- Enable Kubernetes API burnrate recording rules
+    kubeApiserverBurnrate: true
+    # -- Enable Kubernetes API SLOS alerting rules
     kubeApiserverSlos: true
     kubelet: true
     kubePrometheusGeneral: true

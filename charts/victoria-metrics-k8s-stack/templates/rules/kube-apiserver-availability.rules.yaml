@@ -3,7 +3,7 @@ Generated from 'kube-apiserver-availability.rules' group from https://raw.github
 Do not change in-place! In order to change this file first read following link:
 https://github.com/VictoriaMetrics/helm-charts/tree/master/charts/victoria-metrics-k8s-stack/hack
 */ -}}
-{{- if and .Values.defaultRules.create .Values.kubeApiServer.enabled .Values.defaultRules.rules.kubeApiserverAvailability }}
+{{- if and .Values.defaultRules.create .Values.kubeApiServer.enabled .Values.defaultRules.rules.kubeApiserver .Values.defaultRules.rules.kubeApiserverAvailability }}
 apiVersion: operator.victoriametrics.com/v1beta1
 kind: VMRule
 metadata:
