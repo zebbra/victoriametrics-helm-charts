@@ -41,13 +41,12 @@ charts = [
         'type': 'json'
     },
     {
-        'source': 'https://raw.githubusercontent.com/VictoriaMetrics/VictoriaMetrics/master/dashboards/vmagent.json',
+        'source': 'https://raw.githubusercontent.com/VictoriaMetrics/VictoriaMetrics/master/dashboards/victoriametrics-cluster.json',
         'destination': '../templates/grafana/dashboards',
         'type': 'json'
     },
     {
-        'name': 'victoriametrics-cluster',
-        'source': 'https://raw.githubusercontent.com/VictoriaMetrics/VictoriaMetrics/cluster/dashboards/victoriametrics.json',
+        'source': 'https://raw.githubusercontent.com/VictoriaMetrics/VictoriaMetrics/master/dashboards/vmagent.json',
         'destination': '../templates/grafana/dashboards',
         'type': 'json'
     },
@@ -55,12 +54,19 @@ charts = [
         'source': 'https://raw.githubusercontent.com/VictoriaMetrics/VictoriaMetrics/master/dashboards/vmalert.json',
         'destination': '../templates/grafana/dashboards',
         'type': 'json'
+    },
+    {
+        'name': 'victoriametrics-operator',
+        'source': 'https://raw.githubusercontent.com/VictoriaMetrics/VictoriaMetrics/master/dashboards/operator.json',
+        'destination': '../templates/grafana/dashboards',
+        'type': 'json'
     }
 ]
 
 skip_list = [
     "prometheus.json",
-    "prometheus-remote-write.json"
+    "prometheus-remote-write.json",
+    "nodes-darwin.json"
 ]
 
 # Additional conditions map
@@ -70,13 +76,16 @@ condition_map = {
     'apiserver': '.Values.kubeApiServer.enabled',
     'controller-manager': '.Values.kubeControllerManager.enabled',
     'kubelet': '.Values.kubelet.enabled',
+    'workload-total': '.Values.kubelet.enabled',
     'proxy': '.Values.kubeProxy.enabled',
     'scheduler': '.Values.kubeScheduler.enabled',
+    'nodes': '(index .Values "prometheus-node-exporter" "enabled")',
     'node-rsrc-use': '(index .Values "prometheus-node-exporter" "enabled")',
     'node-cluster-rsrc-use': '(index .Values "prometheus-node-exporter" "enabled")',
     'victoriametrics-cluster': '.Values.vmcluster.enabled',
     'victoriametrics': '.Values.vmsingle.enabled',
-    'vmalert': '.Values.vmalert.enabled'
+    'vmalert': '.Values.vmalert.enabled',
+    'vmagent': '.Values.vmagent.enabled'
 }
 
 # standard header

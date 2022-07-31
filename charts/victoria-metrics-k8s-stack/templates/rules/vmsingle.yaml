@@ -3,7 +3,7 @@ Generated from 'vmsingle' group from https://raw.githubusercontent.com/VictoriaM
 Do not change in-place! In order to change this file first read following link:
 https://github.com/VictoriaMetrics/helm-charts/tree/master/charts/victoria-metrics-k8s-stack/hack
 */ -}}
-{{- if and .Values.defaultRules.create .Values.defaultRules.rules.vmsingle }}
+{{- if and .Values.defaultRules.create .Values.vmsingle.enabled .Values.defaultRules.rules.vmsingle }}
 apiVersion: operator.victoriametrics.com/v1beta1
 kind: VMRule
 metadata:
@@ -83,18 +83,6 @@ spec:
         description: "The limit of concurrent flushes on instance {{`{{`}} $labels.instance {{`}}`}} is equal to number of CPUs.\n When VictoriaMetrics constantly hits the limit it means that storage is overloaded and requires more CPU."
         summary: VictoriaMetrics on instance {{`{{`}} $labels.instance {{`}}`}} is constantly hitting concurrent flushes limit
       expr: avg_over_time(vm_concurrent_addrows_current[1m]) >= vm_concurrent_addrows_capacity
-      for: 15m
-      labels:
-        severity: warning
-{{- if .Values.defaultRules.additionalRuleLabels }}
-{{ toYaml .Values.defaultRules.additionalRuleLabels | indent 8 }}
-{{- end }}
-    - alert: TooManyLogs
-      annotations:
-        dashboard: {{ index .Values.grafana.ingress.hosts 0 }}/d/wNf0q_kZk?viewPanel=67&var-instance={{`{{`}} $labels.instance {{`}}`}}
-        description: "Logging rate for job \"{{`{{`}} $labels.job {{`}}`}}\" ({{`{{`}} $labels.instance {{`}}`}}) is {{`{{`}} $value {{`}}`}} for last 15m.\n Worth to check logs for specific error messages."
-        summary: Too many logs printed for job "{{`{{`}} $labels.job {{`}}`}}" ({{`{{`}} $labels.instance {{`}}`}})
-      expr: sum(increase(vm_log_messages_total{level="error"}[5m])) by (job, instance) > 0
       for: 15m
       labels:
         severity: warning

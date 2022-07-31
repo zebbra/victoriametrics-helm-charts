@@ -31,5 +31,6 @@ rules:
   - "vmagent"
   - "alertmaanger"
   - "vmsingle"
+  - "vmcluster"
   - "vm-health"
 {{- end }}

@@ -42,7 +42,7 @@ defaultRules:
     # -- Enable Kubernetes API availability recording rules
     kubeApiserverAvailability: true
     # -- Enable Kubernetes API historgram recording rules
-    kubeApiserverHistorgram: true
+    kubeApiserverHistogram: true
     # -- Enable Kubernetes API burnrate recording rules
     kubeApiserverBurnrate: true
     # -- Enable Kubernetes API SLOS alerting rules
@@ -517,7 +517,8 @@ vmagent:
   annotations: {}
   # https://docs.victoriametrics.com/operator/api.html#vmagentremotewritespec
   # defined spec will be added to the remoteWrite configuration of VMAgent
-  additionalRemoteWrites: []
+  additionalRemoteWrites:
+    []
     #- url: http://some-remote-write/api/v1/write
   # spec for VMAgent crd
   # https://docs.victoriametrics.com/operator/blob/master/docs/api.MD#vmagentspec

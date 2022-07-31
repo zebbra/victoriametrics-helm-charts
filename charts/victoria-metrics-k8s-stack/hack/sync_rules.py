@@ -50,6 +50,18 @@ charts = [
         'destination': '../templates/rules',
     },
     {
+        'source': 'https://raw.githubusercontent.com/VictoriaMetrics/VictoriaMetrics/master/deployment/docker/alerts-health.yml',
+        'destination': '../templates/rules',
+    },
+    {
+        'source': 'https://raw.githubusercontent.com/VictoriaMetrics/VictoriaMetrics/master/deployment/docker/alerts-cluster.yml',
+        'destination': '../templates/rules',
+    },
+    {
+        'source': 'https://raw.githubusercontent.com/VictoriaMetrics/VictoriaMetrics/master/deployment/docker/alerts-vmagent.yml',
+        'destination': '../templates/rules',
+    },
+    {
         'source': 'https://etcd.io/docs/v3.5/op-guide/etcd3_alert.rules.yml',
         'destination': '../templates/rules',
     }
@@ -87,7 +99,8 @@ condition_map = {
     'node.rules': '.Values.defaultRules.rules.node',
     'vmagent': '.Values.vmagent.enabled .Values.defaultRules.rules.vmagent' ,
     'alertmaanger': '.Values.defaultRules.rules.alertmanager',
-    'vmsingle': '.Values.defaultRules.rules.vmsingle',
+    'vmsingle': '.Values.vmsingle.enabled .Values.defaultRules.rules.vmsingle',
+    'vmcluster': '.Values.vmcluster.enabled .Values.defaultRules.rules.vmcluster',
     'vm-health': '.Values.defaultRules.rules.vmhealth'
 }
 
